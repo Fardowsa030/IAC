@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/product.css">
+  <link rel = "stylesheet" href = "css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WEBSHOP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.html">Aanbiedingen</a></li>
+          <li><a href="categorie.html">Categorieen</a></li>
+          <li><a href="winkelwagen.html">Winkelwagen</a></li>
+          <li><a href="productCRUD.html">testCRUD</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<body>
+   <section id="product-pagina">
+      <div class="container">
+      <div id="afbeelding-omschrijving">
+        
+      </div>
+      <div id="naam-prijs-toevoeg">
+      <div id="aanbiedings_box"></div>
+      <a href="#" id="voegToe">
+          <span>TOEVOEGEN</span>
+      </a>
+      
+      </div>
+      </div>
+   </section>
+   
+
+
+
+
+</body>
+
+<script>
+let productID = localStorage.getItem("productID");
+let previousUrlLocation = localStorage.getItem("URL")
+let toevoegButton = document.getElementById('voegToe');
+let aanbiedingsUrl = "http://localhost:8088/shop/index.html";
+let categorieUrl = "http://localhost:8088/shop/categorie.html";
+let winkelwagen = JSON.parse(localStorage.getItem("winkelwagen"));
+
+
+
+function loadFunctie(){
+	if(previousUrlLocation == aanbiedingsUrl){
+		ProductAanbieding();
+	}
+	else if(previousUrlLocation == categorieUrl){
+		loadProduct();
+	}
+}
+loadFunctie();
+
+
+
+
+function loadProduct(){
+	
+    fetch('http://localhost:8088/shop/restservices/product/'+productID)
+    .then(response => response.json())
+    .then(function(myJSON) {
+
+    	let prijs = myJSON.prijs.toString();
+    	prijs = prijs.replace(".",",");
+        console.log(prijs);
+    	let deel1 = document.getElementById('afbeelding-omschrijving');
+    	let img = document.createElement("img");
+    	let product_omschrijving = document.createElement("p");
+    	let titel_omschrijving = document.createElement("p");
+    	img.src = myJSON.afbeelding;
+    	titel_omschrijving.innerHTML = "Product omschrijving: ";
+    	titel_omschrijving.style.fontWeight = "900";
+    	product_omschrijving.innerHTML = myJSON.omschrijving;
+    	deel1.appendChild(img);
+    	deel1.appendChild(titel_omschrijving);
+    	deel1.appendChild(product_omschrijving);
+    	let deel2 = document.getElementById('naam-prijs-toevoeg');
+    	let productNaam = document.createElement("h3");
+    	productNaam.innerHTML = myJSON.naam;
+    	let productPrijs = document.createElement("h3");
+    	productPrijs.innerHTML = "€ " + prijs;
+    	deel2.after(toevoegButton);
+    	productNaam.after(toevoegButton);
+    	deel2.appendChild(productNaam);
+    	deel2.appendChild(productPrijs);
+    	toevoegButton.addEventListener("click",function(){
+    		storeProducts(myJSON);
+    	});
+});
+}
+
+
+
+
+
+function ProductAanbieding(){
+	
+    fetch('http://localhost:8088/shop/restservices/aanbiedingen/'+productID)
+    .then(response => response.json())
+    .then(function(myJSON) {
+    	console.log(toevoegButton);
+    	let prijs = myJSON.prijs.toString();
+    	prijs = prijs.replace(".",",");
+        console.log(prijs);
+    	let deel1 = document.getElementById('afbeelding-omschrijving');
+    	let aanbiedings_deel = document.getElementById('aanbiedings_box');
+    	let geldigheid = document.createElement("h6");
+    	let reclametekst = document.createElement("h6");
+    	geldigheid.innerHTML = "Dit product is geldig van " + myJSON.vanDatum + " tot " + myJSON.totDatum;
+    	reclametekst.innerHTML = myJSON.reclameTekst;
+    	let img = document.createElement("img");
+    	let product_omschrijving = document.createElement("p");
+    	let titel_omschrijving = document.createElement("p");
+    	img.src = myJSON.afbeelding;
+    	titel_omschrijving.innerHTML = "Product omschrijving: ";
+    	titel_omschrijving.style.fontWeight = "900";
+    	product_omschrijving.innerHTML = myJSON.omschrijving;
+    	deel1.appendChild(img);
+    	deel1.appendChild(titel_omschrijving);
+    	deel1.appendChild(product_omschrijving);
+    	let deel2 = document.getElementById('naam-prijs-toevoeg');
+    	aanbiedings_deel.append(geldigheid);
+    	aanbiedings_deel.append(reclametekst);
+    	let productNaam = document.createElement("h3");
+    	productNaam.innerHTML = myJSON.naam;
+    	let productPrijs = document.createElement("h3");
+    	productPrijs.innerHTML = "Van € " + myJSON.productPrijs + " naar € " + myJSON.prijs ;
+    	productPrijs.style.color = "red";
+    	deel2.after(toevoegButton);
+    	productNaam.after(toevoegButton);
+    	deel2.appendChild(productNaam);
+    	deel2.appendChild(productPrijs);
+    	toevoegButton.addEventListener("click",function(){
+    		storeProducts(myJSON);
+    	});
+    	
+    	 
+    	
+    })
+   
+
+	
+}
+    
+
+    
+ function storeProducts(object){
+	  
+    	let productArr =  JSON.parse(localStorage.getItem('winkelwagen')) || [];
+        productArr.push(object);
+        localStorage.setItem('winkelwagen', JSON.stringify(productArr));
+    }
+ 
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WEBSHOP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a  class = "current" href="index.html">Aanbiedingen</a></li>
+          <li><a href="categorie.html">Categorieen</a></li>
+          <li><a href="winkelwagen.html">Winkelwagen</a></li>
+          <li><a href="productCRUD.html">testCRUD</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<h2>Welkom bekijk onze aanbiedingen!!!</h2>
+<h2 id = "melding"></h2>
+<div id="aanbiedingen">
+
+
+
+</div>
+</div>
+</body>
+
+
+<script>
+let melding = document.getElementById("melding");
+
+function fetchAanbiedingen(){
+fetch('http://localhost:8088/shop/restservices/aanbiedingen/')
+.then(response => response.json())
+.then(function(myJSON) {
+	if(myJSON.length > 0){
+	for(let aanbieding of myJSON){
+	let section_producten = document.querySelector('#aanbiedingen');
+	let product_naam = document.createElement("h5");
+	let product_img = document.createElement("img");
+	let product_prijs = document.createElement("p");
+	let product_prijsAanbieding = document.createElement("p");
+	let product_div = document.createElement("div");
+	let product_omschrijving = document.createElement("p");
+	product_div.id = "product";
+	product_div.className = "aanbieding_product";
+	product_naam.id = "product_naam";
+	product_prijs.id = "product_prijs";
+	product_prijs.className = "product_prijsStreep";	
+	product_prijsAanbieding.id = "product_prijsAanbieding";
+	product_img.src = aanbieding.productAfbeelding;
+	product_img.id = aanbieding.productID;
+	product_img.title = aanbieding.productNaam;
+	product_naam.innerHTML = aanbieding.productNaam;
+	product_prijs.innerHTML = "€ " + aanbieding.productPrijs;
+	product_prijsAanbieding.innerHTML = "€ " + aanbieding.aanbiedingsprijs;
+	product_div.appendChild(product_img);
+	product_div.appendChild(product_naam);
+	product_div.appendChild(product_prijsAanbieding);
+	product_div.appendChild(product_prijs);
+	section_producten.appendChild(product_div);
+
+	}
+	product();
+	}
+	else{
+		melding.innerHTML = "Op dit moment zijn er geen aanbiedingen, probeer het later nog eens!";
+	}
+
+})
+
+}
+
+fetchAanbiedingen()
+
+
+
+function product(){
+ let section_product = document.querySelectorAll('.container #aanbiedingen #product img');
+  console.log(section_product);
+  for(let img of section_product){
+	img.addEventListener("click",function(){
+		// Store img.id voor het ophalen van de product pagina
+		localStorage.setItem("productID", img.id);
+		localStorage.setItem("URL",window.location.href);
+		window.location.replace("http://localhost:8088/shop/product.html");
+		
+	});
+  }
+
+}
+
+</script>
+</html>

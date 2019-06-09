@@ -1,0 +1,57 @@
+#product-pagina{
+	width:100%;
+}
+
+nav{
+	margin-bottom:50px !important;
+}
+
+#afbeelding-omschrijving{
+	width:40%;
+	float:left;
+}
+#afbeelding-omschrijving img{
+	width:100%;
+	height:550px;
+}
+
+#afbeelding-omschrijving p{
+	margin-top:25px;
+	width:100%;
+	font-size: 15px;
+	color:#000;
+	letterspacing:1px;
+}
+
+
+
+#naam-prijs-toevoeg{
+	width: 40%;
+	float:left;
+	border:1px solid #000;
+	margin:70px 50px;
+
+	
+}
+
+#naam-prijs-toevoeg h3{
+	font-size:17px;
+	color:#000;
+	margin-left:20px;
+	
+}
+
+#voegToe{
+	margin-top:0px;
+	background-color:#000;
+		padding: 15px 80px;
+		display:inline-block;
+		float:right;
+		margin-right:265px;
+}
+
+#voegToe span{
+    color:#fff;
+	display:inline-block;
+}
+

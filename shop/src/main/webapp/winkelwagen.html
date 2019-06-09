@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel = "stylesheet" href = "css/winkelwagen.css">
+  <link rel = "stylesheet" href = "css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WEBSHOP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="categorie.html">Categorieen</a></li>
+       <li><a class="current" href="winkelwagen.html">Winkelwagen</a></li>
+       <li><a href="index.html">Aanbiedingen</a></li>
+       <li><a href="productCRUD.html">testCRUD</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id= "winkelwagen">
+   <div class="container" id="winkelwagen-container">
+    <h2 id="melding"></h2>
+   </div>
+     <div class="container" id="kassa_button">
+      <a id="kassa" href = "#"><span>GA NAAR DE KASSA</span></a>
+      <h3 id="test-select"></h3>
+      
+    
+   </div>
+</section>
+
+
+
+
+</body>
+<script>
+let kassa = document.getElementById("kassa");
+let winkelwagen = JSON.parse(localStorage.getItem("winkelwagen"));
+console.log(winkelwagen);
+let container = document.getElementById("winkelwagen-container");
+let aantal = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; // verzin hier wat anders voor;
+
+
+// check voor dubelle product objecten in localstorage
+function checkProductDuplicates(){
+	const uniqueProducts = Array.from(new Set(winkelwagen.map(a => a.id)))
+	 .map(id => {
+	   return winkelwagen.find(a => a.id === id && a.aanbiedingsid !== null)
+
+	 })
+	 console.log(uniqueProducts);
+	localStorage.setItem("winkelwagen",JSON.stringify(uniqueProducts));
+	return uniqueProducts;
+	
+}
+
+console.log(checkProductDuplicates());
+
+
+
+function melding(){
+	let melding = document.getElementById("melding");
+	melding.innerHTML = "U heeft geen producten in uw winkelwagen! Shop verder..";
+	melding.style.color="#000";
+}
+
+
+
+function loadWinkelwagen(){
+	
+	if(winkelwagen.length > 0){
+		
+		
+	for(let product of checkProductDuplicates()){
+		
+		let row = document.createElement("div");
+		row.className = "row";
+         row.id = product.id;
+		let col_6 = document.createElement("div");
+		col_6.className = "col-md-6";
+		let col_4 = document.createElement("div");
+		col_4.className = "col-md-4";
+		
+          
+            let img = document.createElement("img");
+            img.src = product.afbeelding;
+            let remove_link = document.createElement('a');
+            remove_link.className = "removeProduct";
+            remove_link.id = product.id;
+            let remove_icon = `<i class="fas fa-times"></i>`
+            remove_link.innerHTML = remove_icon;
+            remove_link.title = "remove product";
+            let naam = document.createElement("h5");
+            let prijs = document.createElement("h5");
+            let artikelnummer = document.createElement("h6");
+            let totaal = document.createElement("h6");
+            artikelnummer.innerHTML = "artikelnummer: "+ product.id;
+            totaal.innerHTML = "Totaal: €" + product.prijs;
+            naam.innerHTML = product.naam;
+            prijs.innerHTML = "€ " + product.prijs;
+		    col_4.append(img);
+		    col_6.append(naam);
+		    col_6.append(prijs);
+		    col_6.append(artikelnummer);
+		    col_6.append(totaal);
+		    col_6.append(remove_link);
+		    row.append(col_4);
+
+		     
+		    let select = document.createElement("select");
+		    select.id = product.id;
+			for(let i=0; i<aantal.length; i++){    	
+		    	let option = document.createElement("option");
+		    	option.innerHTML = aantal[i];
+		    	option.value = aantal[i];
+		    	select.append(option);
+		    	col_6.append(select);
+		    }
+			row.append(col_6);
+			container.append(row);	
+	}
+
+	}
+	
+	else if(checkProductDuplicates().length==0){
+		kassa.style.display = "none";
+		melding();
+	
+	}	
+
+}
+
+loadWinkelwagen();
+
+
+//
+let kassa_button = document.getElementById("kassa");
+let aantal_select = document.querySelectorAll("select");
+
+function wijzigAantal(){
+	for(let i of aantal_select){
+		console.log(i.id);
+		let test = {"aantal": i.value};
+		for(let product of winkelwagen){
+			if(i.id == product.id){
+				console.log(product);
+				console.log(typeof(product));
+				Object.assign(product,test);
+				console.log(product);
+				localStorage.setItem('winkelwagen', JSON.stringify(checkProductDuplicates()));
+			
+			}
+			
+		}
+	}
+	window.location.replace("http://localhost:8088/shop/account.html");
+}
+
+
+kassa_button.addEventListener("click",wijzigAantal);
+
+
+let remove = document.querySelectorAll(".removeProduct");
+console.log(remove);
+
+// verwijder functie product
+for(let i of remove){
+	i.addEventListener("click",function(){
+	for(let product of winkelwagen){
+		if(i.id == product.id){
+			 winkelwagen.splice(product, 1); 
+			 break; 
+		}
+	}
+		localStorage.setItem("winkelwagen", JSON.stringify(winkelwagen)); //set item back into storage
+		location.reload();
+		
+	})
+
+
+}
+/*******************************/
+
+
+
+</script>
+</html>

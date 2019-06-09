@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel = "stylesheet" href = "css/kassa.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+   <div class="container">
+      <div id="gegevens-account">
+      <header id ="title">
+         <h2>MIJN GEGEVENS</h2>
+      </header>
+      <form id="mijn-gegevens">
+       <h5 id="woonadres">WOONADRES</h5>
+		  <div class="form-row">
+		    <div class="col-md-6">
+		    <label for="voornaam">*Voornaam</label>
+		      <input type="text" class="form-control" id="voornaam" name="voornaam" placeholder="Voornaam" disabled>
+		    </div>
+		    <div class="col-md-6">
+		    <label for="achternaam">*Achternaam</label>
+		      <input type="text" class="form-control" id="achternaam" name="achternaam" placeholder="Achternaam" disabled>
+		    </div>
+		     <div class="col-md-6">
+		     <label for="adres">*Adres-straat</label>
+		      <input type="text" class="form-control" id="straat" name ="straat" placeholder="adres-straat" disabled>
+		    </div>
+		    <div class="col-md-6">
+		    <label for="huisnummer">*Huisnummer</label>
+		      <input type="text" class="form-control" id="huisnummer" name="huisnummer" placeholder="Huisnummer" disabled>
+		    </div>
+		     <div class="col-md-6">
+		     <label for="plaats">*Plaats</label>
+		      <input type="text" class="form-control" id="plaats" name="plaats" placeholder="Plaats" disabled>
+		    </div>
+		    <div class="col-md-6">
+		    <label for="postcode">*Postcode</label>
+		      <input type="text" class="form-control" id="postcode" name="postcode" placeholder="postcode" disabled>
+		    </div>
+		  </div>
+		  
+		  <!-- persoonlijke gegevns -->
+		  <h5 id="persoon">PERSOONLIJKE GEGEVENS</h5>
+		  <p id="email">E-mailadres
+		    <span id="emailadres"></span>
+		  </p>
+		  <div class="col-md-6 gast">
+		     <label for="email">E-mail</label>
+		      <input type="text" class="form-control" id="e_mail" name="email" placeholder="email">
+		  </div>
+		  
+		  <div class="col-md-6 padding">
+		   <p id="geboorte">Geboortedatum
+		    <span id="geboortedatum"></span>
+		  
+		  </p>
+		  </div>
+		  <div class="col-md-6 gast1">
+		      <label for="date">Geboortedatum</label>
+		      <input type="date" class="form-control" id="gbdatum" name="gbdatum" placeholder="geboortedatum">
+		  </div>
+		  
+
+		  <div class="form-row">
+		    <div class="col-md-6 left">
+		    <label for="mobiel">Mobiele-telefoonnummer</label>
+		      <input type="text" class="form-control" id="mobiel" name="mobiel" placeholder="Mobielenummer" disabled>
+		    </div>
+		    </div>
+		  
+		  
+		</form>
+		
+		 <div id="verzending">
+		  <div id="verzending-holder">
+		  <h2 id="title-verzending">VERZENDING</h2>
+		  <h5 id=verzendmethode>Verzendmethode
+		    <span id="verzend">Standaardlevering (Thuis levering 2-3 dag(en), € 0,00)</span>
+		  </h5>
+		  <h5 id=leveringsadres>LEVERINGSADRES
+		    <span id="levering"></span>
+		  </h5>
+		  <h5 id=leveringupdates>Telefoonnummer voor leveringsupdates
+		    <span id="updates"></span>
+		  </h5>
+		  
+		  
+		  </div>
+		</div>
+		
+		<div id="akkoord">
+          <a href="#" id="voltooid">
+              <span>AANKOOP VOLTOOIEN</span>
+          </a>
+      </div>
+      
+      <div id="error">
+          <h5>U heeft geen producten in uw winkelwagen shop verder!</h5>
+      </div>
+      
+		
+		
+
+      </div>
+      
+      
+      
+     
+   
+   
+    <div id="bestelling">
+      <div id="bestelling-holder">
+      <header id="eigen-bestelling">
+           <h4>JE BESTELLING</h4>
+      </header>
+      <div id="bedrag-holder">
+      <div class="row one">
+		    <div class="col-md-6">
+		    <label id="dun">BESTELWAARDE:</label>
+		     <label id="dik">TOTAAL:</label>
+		    </div>
+      </div>
+            <div class="row two">
+		    <div class="col-md-6">
+		    <p id="bestelwaarde"></p>
+		    <p id="totaal"></p>
+		    </div>
+      </div>
+      </div>
+      <header id="bekijken">
+           <h4>BESTELGEGEVENS BEKIJKEN</h4>
+      </header>
+      <div id="product-holder">
+      
+      <!-- hier komt alles van de winkelwagen -->
+      
+      
+      </div>
+
+      </div>
+    </div>
+
+   </div>
+</body>
+
+<script>
+let winkelwagen = JSON.parse(localStorage.getItem("winkelwagen"));
+function winkelProducten(){
+	let products = document.getElementById("product-holder");
+	for(let i of winkelwagen){
+		let row = document.createElement("div");
+		row.className = "row";
+		let col_4 = document.createElement("div");
+		col_4.className = "col-md-4";
+		let col_8 = document.createElement("div");
+		col_8.className = "col-md-8";
+		let img = document.createElement("img");
+		img.src = i.afbeelding;
+		img.id = "afbeelding";
+		let product_naam = document.createElement("p");
+		product_naam.id = "naam";
+		product_naam.innerHTML = i.naam;
+		let product_prijs = document.createElement("p");
+		product_prijs.id = "prijs";
+		product_prijs.innerHTML = "€ " + i.prijs;
+		product_aantal =  document.createElement("p");
+		product_aantal.id = "aantal";
+		product_aantal.innerHTML = "Aantal: " + i.aantal;
+		product_artikel = document.createElement("p");
+		product_artikel.id = "artikel";
+		product_artikel.innerHTML = "Art.nr: " + i.id;
+		product_totaal = document.createElement("p");
+		product_totaal.id = "totaal";
+		let prijs_totaal = i.aantal * i.prijs;
+		product_totaal.innerHTML = "Toaal: €" +prijs_totaal.toFixed(2);; 
+		col_4.append(img);
+		col_8.append(product_naam);
+		col_8.append(product_prijs);
+		col_8.append(product_aantal);
+		col_8.append(product_artikel);
+		col_8.append(product_totaal);
+		row.append(col_4);
+		row.append(col_8);
+		products.append(row);
+	}
+	
+	
+}
+function getSum(total, num) {
+	  return total + num;
+	}
+
+winkelProducten();
+
+let list = new Array();
+let klantID = window.sessionStorage.getItem("klantID");
+console.log(klantID);
+function getKlantgegevens(){
+      fetch('http://localhost:8088/shop/restservices/account/'+klantID)
+		 .then(response => response.json())
+		 .then(function(myJSON) {
+			 //style display = none email en gbdatum
+			 let gast = document.getElementsByClassName("gast")[0];
+			 gast.style.display = "none";
+			 let gast1 = document.getElementsByClassName("gast1")[0];
+			 gast1.style.display = "none";
+			 // alle inputs eerst
+			 let voornaam = document.getElementById("voornaam");
+			 voornaam.value = myJSON.voornaam;
+			 let achternaam = document.getElementById("achternaam");
+			 achternaam.value = myJSON.achternaam;
+			 let adres = document.getElementById("straat");
+			 adres.value = myJSON.straat;
+			 let huisnummer = document.getElementById("huisnummer");
+			 huisnummer.value = myJSON.huisnummer;
+			 let plaats = document.getElementById("plaats");
+			 plaats.value = myJSON.woonplaats;
+			 let postcode = document.getElementById("postcode");
+			 postcode.value = myJSON.postcode;
+			 let geboortedatum = document.getElementById("geboortedatum");
+			 geboortedatum.innerHTML = myJSON.geboortedatum;
+			 let email = document.getElementById("emailadres");
+			 email.innerHTML = myJSON.email;
+			 let mobiel = document.getElementById("mobiel");
+			 mobiel.value = myJSON.mobiel;
+			 let update = document.getElementById("updates");
+			 update.innerHTML = myJSON.mobiel;
+			 let levering = document.getElementById("levering");
+			 levering.innerHTML = myJSON.voornaam + " " + myJSON.achternaam + ", " + myJSON.straat + " " + myJSON.huisnummer 
+			 + ", " + myJSON.postcode + " " + myJSON.woonplaats + ", " + "Nederland"; 
+			 
+			 
+		
+			 
+
+		 })
+		 
+		 
+      
+	
+	
+	
+}
+
+function gastGegevens(){
+	var inputs = document.getElementsByTagName("input"); 
+    for (let i = 0; i < inputs.length; i++) { 
+        inputs[i].disabled = false;
+    }
+    let email = document.getElementById("email");
+    let gbdatum = document.getElementsByClassName("padding")[0];
+    let verzending_box = document.getElementById("verzending-holder");
+    verzending_box.style.display = "none";
+    email.style.display = "none";
+    gbdatum.style.display = "none";
+    
+    
+ 
+}
+
+
+
+if(klantID!=null){
+	getKlantgegevens();
+}
+
+else{
+	gastGegevens();
+	
+}
+
+
+
+
+
+let winkel = window.localStorage.getItem("winkelwagen");
+let checkbox = document.getElementById("check");
+
+
+
+
+function postOrder(){
+$.ajax({
+    method:'post',
+    url:"http://localhost:8088/shop/restservices/order/",
+    data:{klant:klantID,orderRegel:winkel},
+    success:function(){
+    	
+       console.log("gelukt..")
+       localStorage.setItem('winkelwagen',"[]");
+       sessionStorage.removeItem('klantID');
+       sessionStorage.removeItem('JWT');
+       location.href = "succes.html";
+    }
+    
+    
+});
+}
+let voltooid = document.getElementById("voltooid");
+//voltooid.addEventListener("click",postOrder);
+
+
+
+
+let voornaam_form = document.getElementById("voornaam");
+let achternaam_form = document.getElementById("achternaam");
+let postcode_form = document.getElementById("postcode");
+let straat_form = document.getElementById("straat");
+let huisnummer_form = document.getElementById("huisnummer");
+let plaats_form = document.getElementById("plaats");
+let gbdatum_form = document.getElementById("gbdatum");
+let email_form = document.getElementById("e_mail");
+let mobiel_form = document.getElementById("mobiel");
+
+
+function PostOrderGast(){
+	$.ajax({
+	    method:'post',
+	    url:"http://localhost:8088/shop/restservices/order/gast",
+	    data:{huisnummer:huisnummer_form.value,voornaam:voornaam_form.value,achternaam:achternaam_form.value,postcode:postcode_form.value,straat:straat_form.value,email:email_form.value,gbdatum:gbdatum_form.value,mobiel:mobiel_form.value,plaats:plaats_form.value,orderRegel:winkel},
+	    success:function(){
+	       console.log("gelukt..")
+	       localStorage.setItem('winkelwagen',"[]");
+	       location.href = "succes.html";
+	    }
+	});
+	}
+
+
+//voltooid.addEventListener("click",PostOrderGast);
+
+
+let totaal = document.getElementById("totaal");
+function altijd(){
+		for(let product of winkelwagen){
+			 if(winkelwagen.length == 0){
+				 
+			 }
+			 let totale_waarde = 0;
+			 totale_waarde  += product.aantal * product.prijs;
+			 console.log(totale_waarde);
+			 console.log(typeof(totale_waarde))
+			 list.push(totale_waarde);
+			 console.log(list.reduce(getSum));
+
+		}
+		var number = list.reduce(getSum);
+		console.log("antwoord: "+ number);
+		console.log("type: "+ typeof(number));
+		
+		var test = number.toString();
+		console.log("antwoord: "+ test);
+		console.log("type: "+ typeof(test));
+		
+		let bestelwaarde = document.getElementById("bestelwaarde");
+		bestelwaarde.innerHTML = "€ "+ number;
+		totaal.innerHTML ="€ "+ number;
+
+
+}
+
+if(winkelwagen.length > 0){
+	altijd();
+}
+else{
+	voltooid.style.display = "none";
+	document.getElementById("error").style.display = "block";
+	totaal.innerHTML = "u heeft geen producten in uw winkelwagen!";
+}
+
+
+
+
+if(klantID != null){
+	voltooid.addEventListener("click",postOrder);
+}
+else{
+	voltooid.addEventListener("click",PostOrderGast);
+}
+
+
+
+
+
+
+
+
+</script>
+</html>

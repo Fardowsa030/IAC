@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/account.css">
+    <link rel = "stylesheet" href = "css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WEBSHOP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="winkelwagen.html">Winkelwagen</a></li>
+       <li><a href="index.html">Aanbiedingen</a></li>
+       <li><a href="productCRUD.html">testCRUD</a></li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">categoriën
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+ <section id="account-gast"> 
+   <div class="container">
+   <div id="account">
+     <header id = "gebruikersprofiel">
+         <h2>IK HEB AL EEN GEBRUIKERSPROFIEL</h2>
+     </header>
+     <form id="form">
+        <p>Login</p>
+         <label for="gebruikersnaam">Gebruikersnaam</label>
+         <input type="text" name="gebruikersnaam" id="gebruikersnaam">
+         <label for="wachtwoord">Wachtwoord</label>
+         <input type="password" name="wachtwoord" id="wachtwoord">
+         <a id="account-button" href="#">
+              <span>GA NAAR DE KASSA</span>
+         </a>
+     
+     </form>
+   
+   </div>
+   <div id="gast">
+    <header id = "nieuw">
+         <h2> NIEUWE KLANT</h2>
+     </header>
+     <div id="afrekenen-gast">
+        <p>Afrekenen als gast</p>
+        <a id="gast-button" href="kassa.html">
+              <span>AFREKENEN ALS GAST</span>
+         </a>
+     </div>
+     
+     
+   
+   </div>
+   </div>
+
+</section>
+ 
+</body>
+<script>
+
+
+
+
+
+function login(event) {
+    var formData = new FormData(document.querySelector("#form"));
+    var encData = new URLSearchParams(formData.entries());
+    fetch("http://localhost:8088/shop/restservices/authentication", { method: 'POST', body: encData })
+        .then(function(response) {
+              if (response.ok) return response.json();
+              
+              else throw "Wrong username/password";
+          })
+         .then(myJson => window.sessionStorage.setItem("JWT", myJson.JWT))
+         .then(myJson =>postJWT())
+     
+
+
+         .catch(error => console.log(error));    
+     }
+
+     document.querySelector("#account-button").addEventListener("click",login);
+
+    
+
+function postJWT(){
+				$.ajax({
+			    		    method:'post',
+			    		    url:"http://localhost:8088/shop/restservices/authentication/gegevens",
+			    		    data:{token:sessionStorage.getItem('JWT')},
+			    		})
+			    		 .done(function(myJSON) {
+			    			console.log(myJSON);
+			    			sessionStorage.setItem("klantID", myJSON.id_klant);
+			    			window.location.href = 'kassa.html';
+			    		 })
+			    		 
+			    		
+			
+			    	
+     
+}
+
+
+//document.querySelector("#account-button").addEventListener("click",postJWT);
+
+    
+
+
+</script>
+</html>

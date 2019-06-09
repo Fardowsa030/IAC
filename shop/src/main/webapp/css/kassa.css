@@ -1,0 +1,232 @@
+body{
+	 box-sizing: border-box;
+}
+
+#gegevens-account{
+	width:650px;
+	height:670px;
+	border:1px solid lightgrey;
+	display:inline-block;
+	float:left;
+	
+	
+}
+
+#error{
+	margin-top:400px;
+	display:none;
+}
+
+label{
+	margin-bottom:10px;
+	letterspacing:1px;
+	font-size:13px;
+}
+
+#title {
+	width:100%;
+	border-bottom:1px solid lightgrey;
+}
+
+#title h2{
+	padding:20px;
+	font-size:14px;
+	font-weight:600;
+	margin:0px;
+}
+
+#woonadres,#persoon{
+	padding-left:15px;
+	margin-bottom:40px;
+	margin-top:30px;
+	font-size:13px;
+	font-weight:600;
+	letterspacing:2px;
+}
+
+.form-control{
+	border-radius:0px;
+}
+
+#mijn-gegevens{
+	width:100%;
+	margin-top:20px;
+	
+}
+
+#mijn-gegevens input{
+	height:46px;
+	margin-bottom:20px;
+	background-color:#f3f3f3;
+	color:#707070;
+	width:100%;
+	border-radius:none !important;
+	
+}
+
+#email,#geboorte{
+	font-size:12px;
+	font-weight:600;
+	letterspacing:1px;
+	display:block;
+	padding-left:15px;
+	margin-bottom:10px;
+}
+
+#emailadres,#geboortedatum{
+	display:block;
+	margin-top:10px;
+	font-weight:300;
+	
+}
+#geboorte{
+	margin-top:20px;
+}
+
+.left{
+	float:right
+}
+
+.padding{
+	padding:0px;
+}
+
+#verzending{
+	margin:30px 0px;
+	width:650px;
+	border:1px solid lightgrey;
+	float:left;
+	display:inline-block;
+	float:left;
+	
+}
+
+#verzending-holder{
+	width:100%;
+	padding-left:15px;
+}
+
+#verzending-holder h2{
+	font-size:14px;
+	font-weight:600;
+	margin-bottom:30px;
+}
+
+#verzendmethode,#leveringsadres,#leveringupdates{
+	font-size:12px;
+	font-weight:600;
+	display:block;
+	margin-bottom:20px;
+}
+
+#verzend,#levering,#updates{
+	display:block;
+	font-weight:300;
+	margin-top:10px;
+}
+
+
+#bestelling{
+	width:451px;
+	height:500px;;
+	float:right;
+    display:block;
+
+
+}
+
+#bestelling-holder{
+	width:100%;
+	height:100%;
+
+}
+
+#eigen-bestelling{
+	border-bottom:1px solid lightgrey;
+}
+
+#eigen-bestelling h4{
+	letterspacing:1px;
+	font-weight:600;
+	display:block;
+	padding:15px;
+	margin:0px;
+}
+
+.one{
+	margin-top:50px;
+	display:inline-block;
+	padding-bottom:20px;
+}
+
+.two {
+	display:inline-block;
+	float:right;
+	margin-top:50px;
+	padding-bottom:20px;
+}
+
+.two p{
+	width:90px;
+}
+
+#bedrag-holder{
+	border-bottom:1px solid lightgrey;
+	padding-left:15px;
+}
+
+#bekijken{
+	border-bottom:1px solid lightgrey;
+	
+}
+
+#bekijken h4{
+	padding:15px;
+}
+
+#product-holder{
+	width:100%;
+}
+
+#product-holder .col-md-4{
+	width:150px;
+	height:140px;
+}
+
+#afbeelding{
+	width:100%;
+	height:100%;
+}
+
+#product-holder .row{
+	padding:15px;
+	border-bottom:1px solid lightgrey;
+}
+
+#product-holder #naam,#prijs,#totaal{
+	font-weight:600;
+}
+
+#akkoord{
+	float:left;
+}
+
+#voltooid{
+	
+	display:block;
+	background-color:#000;
+	text-align:center;
+	margin:20px 0px;
+	
+}
+
+#voltooid span{
+
+	display:block;
+	fotnt-size:13px;
+	font-weight:600;
+	color:#fff;
+	padding:15px;
+	
+}
+

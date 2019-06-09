@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Simply Me</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">WEBSHOP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="winkelwagen.html">Winkelwagen</a></li>
+       <li><a href="index.html">Aanbiedingen</a></li>
+       <li><a href="productCRUD.html">testCRUD</a></li>
+     
+        <li class="dropdown">
+        <a class="dropdown-toggle current"  data-toggle="dropdown" href="#">categoriën
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id= "producten">
+  <div class="container">
+     <h2 id="melding_error"></h2>
+     <h2 id="omschrijving_categorie"></h2>
+  
+  
+  </div>
+</section>
+
+
+<script>
+let product;
+let section_producten = document.querySelector('#producten .container');
+function loadCategories(){
+    fetch('http://localhost:8088/shop/restservices/categorie')
+    .then(response => response.json())
+    .then(function(myJSON) {
+    	console.log(myJSON);
+       let content = document.querySelector('.dropdown-menu');
+       for(let categorie of myJSON){
+    	   let li = document.createElement("li");
+           let a_link = document.createElement("a");
+           a_link.id = categorie.id;
+           let text = document.createTextNode(categorie.naam);
+           a_link.appendChild(text);
+           li.appendChild(a_link);
+           content.appendChild(li);
+           
+ 
+           a_link.addEventListener("click",function(){
+        	  if(a_link.textContent == "Nieuw"){
+        		   console.log("dit klopt");
+        		   fetch('http://localhost:8088/shop/restservices/product/nieuw')
+        		    .then(response => response.json())
+        	        .then(function(myjson) {
+        	        	if(myjson.length != 0){
+        	        	console.log(myjson);
+        	        	dry(product,myjson);
+        	        	}
+        	        	else{
+        	        		document.getElementById("melding_error").innerHTML = "ER IS EEN FOUT OPGETREDEN PROBEER HET LATER OPNIEUW";
+        	        	}
+        	        })
+        	   }
+        	   
+        	   fetch('http://localhost:8088/shop/restservices/categorie/'+categorie.id)
+        	    .then(response => response.json())
+        	    .then(function(myJSON) {
+        	    	dry(categorie,myJSON);
+        	    	
+        	  
+        	    	
+        	    	});	
+        	    
+        	    	
+        	    })
+        	    
+               
+             }
+    	   
+       });
+
+       
+    }
+
+         
+loadCategories();
+
+function dry(iteratie,JSON){
+	for(let iteratie of JSON){
+		let categorie_omschrijving = document.getElementById('omschrijving_categorie');
+		if(iteratie.categorieomschrijving == null){
+			categorie_omschrijving.innerHTML = "Nieuwe producten";
+		}
+		else{
+			categorie_omschrijving.innerHTML = iteratie.categorieomschrijving;
+		}
+    	let product_naam = document.createElement("h5");
+    	let product_img = document.createElement("img");
+    	let product_prijs = document.createElement("p");
+    	let product_div = document.createElement("div");
+    	let product_omschrijving = document.createElement("p");
+    	product_div.id = "product";
+    	product_naam.id = "product_naam";
+    	product_prijs.id = "product_prijs";
+    	product_img.src = iteratie.afbeelding;
+    	product_img.id = iteratie.id;
+    	product_img.title = iteratie.naam;
+    	product_naam.innerHTML = iteratie.naam;
+    	product_prijs.innerHTML = "€ " + iteratie.prijs;
+    	product_div.appendChild(product_img);
+    	product_div.appendChild(product_naam);
+    	product_div.appendChild(product_prijs);
+    	section_producten.appendChild(product_div);
+    	
+    	    	
+getProduct();
+
+		
+	}
+	
+}
+
+
+function getProduct(){
+  let section_product = document.querySelectorAll('#producten .container #product img');
+  console.log(section_product);
+  for(let img of section_product){
+	img.addEventListener("click",function(){
+		localStorage.setItem("productID", img.id);
+		localStorage.setItem("URL",window.location.href);
+		window.location.replace("http://localhost:8088/shop/product.html");
+		
+	});
+  }
+
+}
+
+
+
+
+</script>
